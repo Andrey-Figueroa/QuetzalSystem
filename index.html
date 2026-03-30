@@ -3,21 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeuraLoom — Inventario</title>
+<title>NeuraLoom — Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Fondo más oscuro solicitado */
     --forest:   #040a07; 
     --deep:      #08140f;
     --canopy:    #0c1d15;
     --teal:      #00c9a7;
     --teal-mid:  #009e83;
     --teal-dim:  rgba(0,201,167,0.12);
-    --teal-glow: rgba(0,201,167,0.25);
     --crimson:   #d63a2f;
-    --crimson-dim: rgba(214,58,47,0.15);
-    --gold:      #f0a832;
     --white:     #e8f2ee;
     --muted:     #6b9e85;
     --border:    rgba(0,201,167,0.15);
@@ -34,7 +30,6 @@
     overflow-x: hidden;
   }
 
-  /* Fondo con texturas sutiles */
   body::before {
     content: '';
     position: fixed;
@@ -46,7 +41,6 @@
     z-index: 0;
   }
 
-  /* Layout sin Sidebar */
   .layout {
     max-width: 1000px;
     margin: 0 auto;
@@ -55,7 +49,6 @@
     padding: 40px 24px;
   }
 
-  /* Header Superior con Logo */
   .header-brand {
     display: flex;
     align-items: center;
@@ -71,18 +64,13 @@
   .logo-mark svg { width: 18px; height: 18px; }
   .header-brand h2 { font-size: 18px; font-weight: 700; color: var(--white); }
 
-  /* Top Bar */
   .top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
   }
-  .top-bar h1 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
+  .top-bar h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; }
   .top-bar h1 span { color: var(--teal); }
   .top-bar p { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
@@ -96,7 +84,6 @@
     padding: 6px 14px;
   }
 
-  /* Stats cards */
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -115,7 +102,6 @@
   .stat-value.red { color: var(--crimson); }
   .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
-  /* Action Section */
   .section-title {
     font-size: 12px;
     font-weight: 600;
@@ -140,9 +126,16 @@
     text-decoration: none;
     transition: all 0.25s ease;
     position: relative;
+    display: block;
   }
-  .action-card:hover { transform: translateY(-3px); border-color: var(--teal-mid); background: var(--canopy); }
+  .action-card:hover { 
+    transform: translateY(-4px); 
+    border-color: var(--teal); 
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    background: var(--canopy);
+  }
 
+  /* CORRECCIÓN AQUÍ: Tarjeta principal apuntando al archivo de entrada */
   .action-card.primary {
     grid-column: span 2;
     display: flex;
@@ -158,7 +151,9 @@
     font-size: 24px;
     background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
+    transition: transform 0.3s ease;
   }
+  .action-card:hover .card-icon-wrap { transform: scale(1.1); }
   .primary .card-icon-wrap { background: var(--teal-dim); color: var(--teal); }
 
   .card-body { flex: 1; }
@@ -177,7 +172,6 @@
   .tag-teal { background: var(--teal-dim); color: var(--teal); }
   .tag-muted { background: rgba(255,255,255,0.05); color: var(--muted); }
 
-  /* Activity List */
   .activity-list {
     background: var(--deep);
     border: 1px solid var(--border);
