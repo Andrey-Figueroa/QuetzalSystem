@@ -7,19 +7,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --forest:   #091a10;
-    --deep:     #0d2318;
-    --canopy:   #122e1e;
-    --teal:     #00c9a7;
-    --teal-mid: #009e83;
-    --teal-dim: rgba(0,201,167,0.12);
-    --teal-glow:rgba(0,201,167,0.25);
-    --crimson:  #d63a2f;
+    /* Fondo más oscuro solicitado */
+    --forest:   #040a07; 
+    --deep:      #08140f;
+    --canopy:    #0c1d15;
+    --teal:      #00c9a7;
+    --teal-mid:  #009e83;
+    --teal-dim:  rgba(0,201,167,0.12);
+    --teal-glow: rgba(0,201,167,0.25);
+    --crimson:   #d63a2f;
     --crimson-dim: rgba(214,58,47,0.15);
-    --gold:     #f0a832;
-    --white:    #e8f2ee;
-    --muted:    #6b9e85;
-    --border:   rgba(0,201,167,0.15);
+    --gold:      #f0a832;
+    --white:     #e8f2ee;
+    --muted:     #6b9e85;
+    --border:    rgba(0,201,167,0.15);
     --sans: 'Poppins', sans-serif;
   }
 
@@ -33,143 +34,57 @@
     overflow-x: hidden;
   }
 
-  /* ── Background texture ── */
+  /* Fondo con texturas sutiles */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,201,167,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(214,58,47,0.05) 0%, transparent 60%);
+    background: 
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,201,167,0.05) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(214,58,47,0.03) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
 
-  /* ── Layout ── */
+  /* Layout sin Sidebar */
   .layout {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    min-height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
     position: relative;
     z-index: 1;
+    padding: 40px 24px;
   }
 
-  /* ── Sidebar ── */
-  .sidebar {
-    background: var(--deep);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    padding: 32px 0;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-  }
-
-  .logo {
-    padding: 0 28px 32px;
-    border-bottom: 1px solid var(--border);
-  }
-  .logo-mark {
-    width: 38px; height: 38px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--teal), var(--teal-mid));
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 12px;
-  }
-  .logo-mark svg { width: 20px; height: 20px; }
-  .logo h2 {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: -0.01em;
-  }
-  .logo p {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .nav { flex: 1; padding: 24px 16px; }
-  .nav-label {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0 12px;
-    margin-bottom: 8px;
-    margin-top: 20px;
-  }
-  .nav-label:first-child { margin-top: 0; }
-
-  .nav-item {
+  /* Header Superior con Logo */
+  .header-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .logo-mark {
+    width: 34px; height: 34px;
     border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    margin-bottom: 2px;
-  }
-  .nav-item:hover { color: var(--white); background: rgba(255,255,255,0.05); }
-  .nav-item.active {
-    color: var(--teal);
-    background: var(--teal-dim);
-  }
-  .nav-icon {
-    width: 18px; height: 18px;
+    background: linear-gradient(135deg, var(--teal), var(--teal-mid));
     display: flex; align-items: center; justify-content: center;
-    font-size: 15px; flex-shrink: 0;
   }
+  .logo-mark svg { width: 18px; height: 18px; }
+  .header-brand h2 { font-size: 18px; font-weight: 700; color: var(--white); }
 
-  .nav-badge {
-    margin-left: auto;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 2px 7px;
-    border-radius: 20px;
-    background: var(--crimson-dim);
-    color: var(--crimson);
-  }
-
-  .sidebar-footer {
-    padding: 20px 28px 0;
-    border-top: 1px solid var(--border);
-  }
-  .sidebar-footer p {
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .sidebar-footer span { color: var(--teal); }
-
-  /* ── Main content ── */
-  .main {
-    padding: 48px 48px 64px;
-    overflow-y: auto;
-  }
-
+  /* Top Bar */
   .top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
   .top-bar h1 {
     font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: var(--white);
   }
   .top-bar h1 span { color: var(--teal); }
-  .top-bar p { font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 400; }
+  .top-bar p { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
   .date-chip {
     font-size: 12px;
@@ -181,7 +96,7 @@
     padding: 6px 14px;
   }
 
-  /* ── Stats row ── */
+  /* Stats cards */
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -192,17 +107,17 @@
     background: var(--deep);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 20px 22px;
+    padding: 20px;
   }
-  .stat-label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-  .stat-value { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; margin-top: 6px; color: var(--white); }
+  .stat-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat-value { font-size: 28px; font-weight: 700; margin-top: 4px; color: var(--white); }
   .stat-value.teal { color: var(--teal); }
   .stat-value.red { color: var(--crimson); }
-  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 400; }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
-  /* ── Action heading ── */
+  /* Action Section */
   .section-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
@@ -210,7 +125,6 @@
     margin-bottom: 16px;
   }
 
-  /* ── Action cards grid ── */
   .actions {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -222,110 +136,48 @@
     background: var(--deep);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 28px;
-    cursor: pointer;
+    padding: 24px;
     text-decoration: none;
-    display: block;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.25s ease;
     position: relative;
-    overflow: hidden;
   }
-  .action-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-  .action-card:hover { transform: translateY(-3px); border-color: var(--teal-mid); }
-  .action-card:hover::before { opacity: 1; }
+  .action-card:hover { transform: translateY(-3px); border-color: var(--teal-mid); background: var(--canopy); }
 
-  /* PRIMARY card — Entrada */
   .action-card.primary {
-    background: linear-gradient(135deg, #0d2e1e 0%, #0a2418 60%, #061a12 100%);
-    border-color: rgba(0,201,167,0.35);
     grid-column: span 2;
     display: flex;
     align-items: center;
-    gap: 32px;
-    padding: 32px 36px;
+    gap: 24px;
+    border-color: rgba(0,201,167,0.3);
   }
-  .action-card.primary::after {
-    content: '';
-    position: absolute;
-    top: -60px; right: -40px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,201,167,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .action-card.primary:hover { border-color: var(--teal); box-shadow: 0 0 0 1px rgba(0,201,167,0.2), 0 20px 40px rgba(0,0,0,0.4); }
 
   .card-icon-wrap {
-    width: 64px; height: 64px;
-    border-radius: 18px;
+    width: 52px; height: 52px;
+    border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 28px;
-    flex-shrink: 0;
-  }
-  .primary .card-icon-wrap { background: var(--teal-dim); border: 1px solid rgba(0,201,167,0.25); }
-  .action-card:not(.primary) .card-icon-wrap {
-    width: 48px; height: 48px; border-radius: 14px;
-    font-size: 22px;
-    margin-bottom: 16px;
-    background: rgba(255,255,255,0.04);
+    font-size: 24px;
+    background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
   }
+  .primary .card-icon-wrap { background: var(--teal-dim); color: var(--teal); }
 
   .card-body { flex: 1; }
-  .card-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: -0.02em;
-    margin-bottom: 6px;
-  }
-  .action-card:not(.primary) .card-title { font-size: 15px; margin-bottom: 4px; }
-  .card-desc {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 400;
-    line-height: 1.6;
-  }
-  .action-card:not(.primary) .card-desc { font-size: 12px; }
-
-  .card-arrow {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: var(--teal);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-  }
-  .action-card.primary:hover .card-arrow { transform: translateX(4px); }
-  .card-arrow svg { width: 18px; height: 18px; stroke: #091a10; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* Small cards accent bars */
-  .card-venta::before { background: linear-gradient(135deg, rgba(214,58,47,0.06), transparent); }
-  .card-ajuste::before { background: linear-gradient(135deg, rgba(240,168,50,0.06), transparent); }
-  .card-reporte::before { background: linear-gradient(135deg, rgba(0,201,167,0.06), transparent); }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .card-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
   .tag {
     display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 3px 9px;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
     border-radius: 20px;
-    margin-top: 12px;
+    margin-top: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
   }
-  .tag-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,201,167,0.2); }
-  .tag-red { background: var(--crimson-dim); color: var(--crimson); border: 1px solid rgba(214,58,47,0.2); }
-  .tag-gold { background: rgba(240,168,50,0.12); color: var(--gold); border: 1px solid rgba(240,168,50,0.2); }
+  .tag-teal { background: var(--teal-dim); color: var(--teal); }
+  .tag-muted { background: rgba(255,255,255,0.05); color: var(--muted); }
 
-  /* ── Recent activity ── */
+  /* Activity List */
   .activity-list {
     background: var(--deep);
     border: 1px solid var(--border);
@@ -333,56 +185,32 @@
     overflow: hidden;
   }
   .activity-header {
-    padding: 18px 22px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
   }
-  .activity-header h3 { font-size: 14px; font-weight: 600; color: var(--white); }
-  .activity-header a { font-size: 12px; color: var(--teal); font-weight: 500; text-decoration: none; }
+  .activity-header h3 { font-size: 14px; color: var(--white); }
+  .activity-header a { font-size: 12px; color: var(--teal); text-decoration: none; }
 
   .activity-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 22px;
-    border-bottom: 1px solid rgba(0,201,167,0.06);
-    transition: background 0.15s;
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(0,201,167,0.05);
   }
-  .activity-row:last-child { border-bottom: none; }
-  .activity-row:hover { background: rgba(255,255,255,0.02); }
-
-  .act-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .dot-teal { background: var(--teal); }
-  .dot-red  { background: var(--crimson); }
-  .dot-gold { background: var(--gold); }
-
-  .act-name { font-size: 13px; font-weight: 500; color: var(--white); flex: 1; }
+  .act-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .act-name { font-size: 13px; color: var(--white); flex: 1; }
   .act-meta { font-size: 11px; color: var(--muted); }
   .act-amount { font-size: 13px; font-weight: 600; }
-  .amt-pos { color: var(--teal); }
-  .amt-neg { color: var(--crimson); }
 
-  /* ── Feather decoration ── */
   .feather-bar {
     height: 3px;
-    background: linear-gradient(90deg, var(--crimson) 0%, var(--teal) 40%, var(--teal-mid) 100%);
-    border-radius: 0 0 0 0;
-    opacity: 0.6;
+    background: linear-gradient(90deg, var(--crimson), var(--teal));
   }
 
-  @media (max-width: 900px) {
-    .layout { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .main { padding: 24px; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .actions { grid-template-columns: 1fr; }
-    .action-card.primary { flex-direction: column; align-items: flex-start; gap: 16px; grid-column: span 1; }
+  @media (max-width: 600px) {
+    .stats, .actions { grid-template-columns: 1fr; }
+    .action-card.primary { grid-column: span 1; flex-direction: column; align-items: flex-start; }
+    .top-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
 </style>
 </head>
@@ -391,155 +219,94 @@
 <div class="feather-bar"></div>
 
 <div class="layout">
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#091a10" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-          <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-      </div>
-      <h2>NeuraLoom</h2>
-      <p>Sistema de Inventario</p>
+  
+  <div class="header-brand">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#040a07" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
     </div>
+    <h2>NeuraLoom</h2>
+  </div>
 
-    <nav class="nav">
-      <div class="nav-label">Principal</div>
-      <a class="nav-item active" href="menu.html">
-        <span class="nav-icon">⊞</span> Dashboard
-      </a>
-
-      <div class="nav-label">Movimientos</div>
-      <a class="nav-item" href="entrada-inventario.html">
-        <span class="nav-icon">↓</span> Entrada de stock
-      </a>
-      <a class="nav-item" href="#">
-        <span class="nav-icon">↑</span> Registro de venta
-      </a>
-      <a class="nav-item" href="#">
-        <span class="nav-icon">⟳</span> Ajuste de inventario
-        <span class="nav-badge">!</span>
-      </a>
-
-      <div class="nav-label">Reportes</div>
-      <a class="nav-item" href="#">
-        <span class="nav-icon">▤</span> Stock actual
-      </a>
-      <a class="nav-item" href="#">
-        <span class="nav-icon">◷</span> Historial
-      </a>
-      <a class="nav-item" href="#">
-        <span class="nav-icon">◈</span> Ventas del día
-      </a>
-    </nav>
-
-    <div class="sidebar-footer">
-      <p>Conectado a<br><span>Google Sheets → n8n</span></p>
+  <div class="top-bar">
+    <div>
+      <h1>Buen día, <span>Andrey</span> 👋</h1>
+      <p>¿Qué querés registrar hoy?</p>
     </div>
-  </aside>
+    <div class="date-chip" id="date-chip">Cargando fecha...</div>
+  </div>
 
-  <!-- Main -->
-  <main class="main">
-
-    <div class="top-bar">
-      <div>
-        <h1>Buen día, <span>Andrey</span> 👋</h1>
-        <p>¿Qué querés registrar hoy?</p>
-      </div>
-      <div class="date-chip" id="date-chip">—</div>
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-label">Productos activos</div>
+      <div class="stat-value teal">124</div>
+      <div class="stat-sub">En catálogo</div>
     </div>
-
-    <!-- Stats -->
-    <div class="stats">
-      <div class="stat-card">
-        <div class="stat-label">Productos activos</div>
-        <div class="stat-value teal">—</div>
-        <div class="stat-sub">En catálogo</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Stock bajo</div>
-        <div class="stat-value red">—</div>
-        <div class="stat-sub">Necesitan reorden</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Ventas hoy</div>
-        <div class="stat-value">₡—</div>
-        <div class="stat-sub">Transacciones del día</div>
-      </div>
+    <div class="stat-card">
+      <div class="stat-label">Stock bajo</div>
+      <div class="stat-value red">8</div>
+      <div class="stat-sub">Necesitan reorden</div>
     </div>
-
-    <!-- Action cards -->
-    <div class="section-title">Acciones rápidas</div>
-
-    <div class="actions">
-
-      <!-- PRIMARY: Entrada de inventario -->
-      <a class="action-card primary" href="entrada-inventario.html">
-        <div class="card-icon-wrap">📦</div>
-        <div class="card-body">
-          <div class="card-title">Entrada de inventario</div>
-          <div class="card-desc">Registrá la llegada de productos de un proveedor. Se actualiza el stock automáticamente en Google Sheets vía n8n.</div>
-          <span class="tag tag-teal">Acción principal</span>
-        </div>
-        <div class="card-arrow">
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
-      </a>
-
-      <!-- Venta -->
-      <a class="action-card card-venta" href="#">
-        <div class="card-icon-wrap">💰</div>
-        <div class="card-title">Registrar venta</div>
-        <div class="card-desc">Registrá ventas del día con múltiples productos por transacción.</div>
-        <span class="tag tag-red">Próximamente</span>
-      </a>
-
-      <!-- Ajuste -->
-      <a class="action-card card-ajuste" href="#">
-        <div class="card-icon-wrap">⚖️</div>
-        <div class="card-title">Ajuste de inventario</div>
-        <div class="card-desc">Corregí diferencias por merma, daño o error de conteo.</div>
-        <span class="tag tag-gold">Próximamente</span>
-      </a>
-
+    <div class="stat-card">
+      <div class="stat-label">Ventas hoy</div>
+      <div class="stat-value">₡0</div>
+      <div class="stat-sub">Sin transacciones</div>
     </div>
+  </div>
 
-    <!-- Recent activity -->
-    <div class="section-title">Actividad reciente</div>
-    <div class="activity-list">
-      <div class="activity-header">
-        <h3>Últimos movimientos</h3>
-        <a href="#">Ver todo →</a>
+  <div class="section-title">Acciones rápidas</div>
+  
+  <div class="actions">
+    <a href="entrada-inventario.html" class="action-card primary">
+      <div class="card-icon-wrap">📦</div>
+      <div class="card-body">
+        <div class="card-title">Entrada de stock</div>
+        <div class="card-desc">Registrá llegada de mercadería. Actualiza Google Sheets.</div>
+        <span class="tag tag-teal">Acción principal</span>
       </div>
-      <div class="activity-row">
-        <div class="act-dot dot-teal"></div>
-        <div class="act-name">Coca-Cola 500ml</div>
-        <div class="act-meta">Entrada · Pali</div>
-        <div class="act-amount amt-pos">+24 u.</div>
+    </a>
+
+    <a href="#" class="action-card">
+      <div class="card-icon-wrap">💰</div>
+      <div class="card-body">
+        <div class="card-title">Ventas</div>
+        <div class="card-desc">Salida de productos.</div>
+        <span class="tag tag-muted">Próximamente</span>
       </div>
-      <div class="activity-row">
-        <div class="act-dot dot-red"></div>
-        <div class="act-name">Arroz 1kg</div>
-        <div class="act-meta">Venta</div>
-        <div class="act-amount amt-neg">-3 u.</div>
+    </a>
+
+    <a href="#" class="action-card">
+      <div class="card-icon-wrap">⚖️</div>
+      <div class="card-body">
+        <div class="card-title">Ajustes</div>
+        <div class="card-desc">Mermas y correcciones.</div>
+        <span class="tag tag-muted">Próximamente</span>
       </div>
-      <div class="activity-row">
-        <div class="act-dot dot-teal"></div>
-        <div class="act-name">Ranchitas</div>
-        <div class="act-meta">Entrada · CEFA</div>
-        <div class="act-amount amt-pos">+48 u.</div>
-      </div>
-      <div class="activity-row">
-        <div class="act-dot dot-gold"></div>
-        <div class="act-name">Helado de vainilla</div>
-        <div class="act-meta">Ajuste · Merma</div>
-        <div class="act-amount" style="color:var(--gold)">-2 u.</div>
-      </div>
+    </a>
+  </div>
+
+  <div class="section-title">Actividad reciente</div>
+  <div class="activity-list">
+    <div class="activity-header">
+      <h3>Últimos movimientos</h3>
+      <a href="#">Ver historial</a>
     </div>
+    <div class="activity-row">
+      <div class="act-dot" style="background:var(--teal)"></div>
+      <div class="act-name">Coca-Cola 500ml</div>
+      <div class="act-meta">Entrada</div>
+      <div class="act-amount" style="color:var(--teal)">+24 u.</div>
+    </div>
+    <div class="activity-row">
+      <div class="act-dot" style="background:var(--crimson)"></div>
+      <div class="act-name">Arroz 1kg</div>
+      <div class="act-meta">Venta</div>
+      <div class="act-amount" style="color:var(--crimson)">-3 u.</div>
+    </div>
+  </div>
 
-  </main>
 </div>
 
 <script>
@@ -547,5 +314,6 @@
   const now = new Date();
   chip.textContent = now.toLocaleDateString('es-CR', { weekday:'long', day:'numeric', month:'long' });
 </script>
+
 </body>
 </html>
