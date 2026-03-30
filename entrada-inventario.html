@@ -31,34 +31,22 @@
     padding: 20px;
   }
 
-  .form-container {
-    width: 100%;
-    max-width: 480px;
-  }
+  .form-container { width: 100%; max-width: 500px; }
 
-  /* Botón Volver estilo Ghost */
   .btn-volver {
     display: inline-flex;
     align-items: center;
-    background: none;
-    border: 1px solid var(--border);
     color: var(--teal);
-    padding: 8px 16px;
-    border-radius: 8px;
+    text-decoration: none;
     font-size: 12px;
     font-weight: 700;
-    text-decoration: none;
-    margin-bottom: 24px;
-    transition: all 0.2s;
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    opacity: 0.8;
   }
-  .btn-volver:hover {
-    background: var(--teal-dim);
-    border-color: var(--teal);
-  }
+  .btn-volver:hover { opacity: 1; }
 
-  /* Tarjeta de Formulario */
   .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -75,40 +63,24 @@
     border-bottom: 1px solid var(--border);
     padding-bottom: 15px;
   }
-  .card-header span { font-size: 20px; }
-  .card-header h2 { 
-    font-size: 18px; 
-    font-weight: 700; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
-    color: var(--white);
-  }
-
-  /* Etiquetas y Grupos */
-  .form-group { margin-bottom: 20px; }
 
   .section-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     color: var(--teal);
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
-  .field-label {
+  .form-group { margin-bottom: 20px; }
+  
+  label {
     display: block;
     font-size: 14px;
-    font-weight: 500;
     margin-bottom: 8px;
-    color: var(--white);
   }
-  .field-label span { color: var(--teal); margin-left: 4px; }
 
-  /* Inputs y Selects */
   input, select, textarea {
     width: 100%;
     background: var(--input-bg);
@@ -118,16 +90,20 @@
     color: var(--white);
     font-family: var(--sans);
     font-size: 14px;
-    transition: all 0.2s ease;
   }
 
-  input:focus, select:focus {
+  input:focus {
     outline: none;
     border-color: var(--teal);
-    box-shadow: 0 0 0 4px var(--teal-dim);
+    box-shadow: 0 0 0 3px var(--teal-dim);
   }
 
-  input::placeholder { color: #2a3d34; }
+  /* Estilo para el input de escáner */
+  .scanner-input {
+    border-left: 4px solid var(--teal);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
 
   .row {
     display: grid;
@@ -135,7 +111,6 @@
     gap: 15px;
   }
 
-  /* Botón de Envío Neón */
   .btn-submit {
     width: 100%;
     background: var(--teal);
@@ -146,82 +121,95 @@
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 10px;
     transition: all 0.3s;
+    margin-top: 10px;
   }
 
   .btn-submit:hover {
     background: #00ebd3;
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 201, 167, 0.2);
   }
 
+  .status-tag {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    display: none; /* Se activa con JS */
+  }
 </style>
 </head>
 <body>
 
 <div class="form-container">
-  
-  <a href="index.html" class="btn-volver">
-    ← Volver
-  </a>
+  <a href="index.html" class="btn-volver">← Volver al Dashboard</a>
 
   <div class="card">
     <div class="card-header">
       <span>📦</span>
-      <h2>Entrada de Inventario</h2>
+      <h2 style="font-size: 18px; text-transform: uppercase;">Entrada de Inventario</h2>
     </div>
 
     <form id="entradaForm">
       
       <div class="form-group">
-        <div class="section-label">📦 Producto</div>
-        <label class="field-label">Nombre del producto<span>*</span></label>
-        <input type="text" placeholder="Ej: Coca-Cola 500ml" required>
-      </div>
-
-      <div class="row">
-        <div class="form-group">
-          <div class="section-label">🔢 Cantidad</div>
-          <label class="field-label">Unidades<span>*</span></label>
-          <input type="number" placeholder="0" min="1" required>
-        </div>
-        
-        <div class="form-group">
-          <div class="section-label">🏢 Origen</div>
-          <label class="field-label">Proveedor</label>
-          <select>
-            <option value="">Selecciona...</option>
-            <option value="pali">Pali</option>
-            <option value="cefa">CEFA</option>
-            <option value="dos_pinos">Dos Pinos</option>
-          </select>
+        <div class="section-label">🔍 Escaneo Obligatorio</div>
+        <label>ID / Código de Barras</label>
+        <input type="text" id="id_producto" class="scanner-input" placeholder="Dispare el escáner aquí..." autofocus required>
+        <div id="status" class="status-tag" style="background: var(--teal-dim); color: var(--teal);">
+          Producto reconocido
         </div>
       </div>
 
       <div class="form-group">
-        <div class="section-label">📝 Notas</div>
-        <label class="field-label">Comentarios</label>
-        <textarea rows="2" placeholder="Opcional..."></textarea>
+        <div class="section-label">📋 Información</div>
+        <label>Nombre del Producto</label>
+        <input type="text" id="nombre" placeholder="Se autocompletará si existe..." readonly>
       </div>
 
-      <button type="submit" class="btn-submit">
-        Registrar entrada →
-      </button>
+      <div class="row">
+        <div class="form-group">
+          <div class="section-label">🔢 Operación</div>
+          <label>Cantidad a ingresar</label>
+          <input type="number" id="stock_actual" placeholder="0" min="1" required>
+        </div>
+        
+        <div class="form-group">
+          <div class="section-label">🏷️ Categoría</div>
+          <label>Categoría</label>
+          <input type="text" id="categoria" placeholder="..." readonly>
+        </div>
+      </div>
 
+      <button type="submit" class="btn-submit">Registrar en Sheets →</button>
     </form>
   </div>
 </div>
 
 <script>
-  // Prevención de envío para pruebas
+  const barcodeInput = document.getElementById('id_producto');
+  const cantidadInput = document.getElementById('stock_actual');
+
+  // El escáner suele enviar un "Enter" al final del código
+  barcodeInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault(); 
+      // Aquí el cursor salta a cantidad automáticamente
+      cantidadInput.focus();
+      
+      // Simulación de búsqueda (aquí llamarías a n8n en el futuro)
+      document.getElementById('status').style.display = 'inline-block';
+      console.log("Código escaneado: " + this.value);
+    }
+  });
+
   document.getElementById('entradaForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log("Datos listos para enviar a n8n");
+    alert('Enviando datos a n8n...');
+    // Aquí puedes resetear el formulario y volver el foco al código de barras
+    e.target.reset();
+    barcodeInput.focus();
+    document.getElementById('status').style.display = 'none';
   });
 </script>
 
